@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <style>
+        img{
+                max-width: 150px;
+        }
+    </style>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Get Zodiak</title>
+</head>
+
+<body>
+    
+    <div class="container mt-5 mb-5">
+        <h1>Cek Zodiak Mu...</h1>
+        <form>
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama" aria-describedby="nama">
+         
+            </div>
+            <div class="form-group">
+                <label for="tanggal">Tanggal Lahir</label>
+                <input type="date" class="form-control" id="tanggal">
+            </div>
+            <a type="submit" id="btnSubmit" class="btn btn-primary">Submit</a>
+        </form>
+        <div id="muncul">
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+<script>
+    /****************************************
+     *       Basic Table                   *
+     ****************************************/
+    $(document).ready(function () {
+
+    $('#btnSubmit').on('click', function () {
+        $("#muncul").html("");
+        var nama = $('#nama').val();	
+        var tanggal = $('#tanggal').val();
+        var url = 'https://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=' + nama +'&tanggal='+tanggal+'';
+
+
+            $.get(url, function (data, status) {
+                
+            // console.log(data,status,status=='error')
+            if(data.status=='error'){
+                      $("#muncul")
+                    .append(`                    
+                    <div class="alert alert-warning" role="alert">
+                      Mohon Di isi semuanya!
+                    </div>
+                                    `);
+            }else{
+                var png ="";
+                if (data.data.zodiak == 'Virgo') {
+                    png = 'img/virgo.png';
+
+                }
+                if (data.data.zodiak == 'Libra') {
+                    png = 'img/libra.png';
+
+                } if (data.data.zodiak == 'Aquarius') {
+                    png = 'img/aquarius.png';
+
+                } if (data.data.zodiak == 'Aries') {
+                    png = 'img/aries.png';
+
+                } if (data.data.zodiak == 'Cancer') {
+                    png = 'img/cancer.png';
+
+                } if (data.data.zodiak == 'Capricorn') {
+                    png = 'img/Capricorn.png';
+
+                } if (data.data.zodiak == 'Gemini') {
+                    png = 'img/gemini.png';
+
+                } if (data.data.zodiak == 'Leo') {
+                    png = 'img/leo.png';
+
+                } if (data.data.zodiak == 'Pisces') {
+                    png = 'img/pisces.png';
+
+                } if (data.data.zodiak == 'Sagitarius') {
+                    png = 'img/sagitarus.png';
+
+                } if (data.data.zodiak == 'Scorpio') {
+                    png = 'img/Scorpio.png';
+
+                } if (data.data.zodiak == 'Taurus') {
+                    png = 'img/taurus.png';
+
+                }
+
+                var data = data.data;
+                  $("#muncul")
+                    // .append("Name: " + data.nama) // John
+                    // .append("Lahir: " + data.lahir)
+                    // .append("Useia: " + data.usia)
+                    .append(`<div class="card text-center mt-5">
+                                                <div class="card-header">
+                                                    Zodiak : `+data.zodiak+`
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Nama : `+ data.nama +`</h5>
+                                                    <p class="card-text">Usia : `+ data.usia +`</p>
+                                                    <p class="card-text">Lahir : `+ data.lahir +`</p>
+                                                  <img src="`+ png +`" class="card-img-top" alt="`+ data.zodiak +`">
+                                                
+                                                </div>
+                                                </div>
+
+                                    `);
+                
+            }
+            
+            });
+
+
+
+        // console.log(nama,tanggal,url)
+        // return false;
+
+    });
+
+
+
+    });
+
+
+</script>
+
+
+
+
+
+</html>
